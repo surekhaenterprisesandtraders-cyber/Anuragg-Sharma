@@ -57,6 +57,7 @@ const reelVideos = [
     title: "Juni — Official Teaser",
     note: "Official teaser · 2:34",
     className: "reel-featured",
+    thumbnail: "sddefault.jpg",
   },
   {
     id: "zvYvlGC2GHw",
@@ -64,6 +65,7 @@ const reelVideos = [
     title: "Two Great Masters",
     note: "Series trailer · 5:30",
     className: "",
+    thumbnail: "sddefault.jpg",
   },
   {
     id: "U8mrzLBS5es",
@@ -71,6 +73,7 @@ const reelVideos = [
     title: "Trust In GOD and Do The Right",
     note: "Official video",
     className: "",
+    thumbnail: "hqdefault.jpg",
   },
 ];
 
@@ -376,7 +379,7 @@ export default function PortfolioExperience() {
                 aria-label={`Play ${video.title}`}
               >
                 <img
-                  src={`https://i.ytimg.com/vi/${video.id}/maxresdefault.jpg`}
+                  src={`https://i.ytimg.com/vi/${video.id}/${video.thumbnail}`}
                   alt=""
                   loading={index === 0 ? "eager" : "lazy"}
                 />
