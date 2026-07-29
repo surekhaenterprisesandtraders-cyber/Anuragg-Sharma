@@ -1656,6 +1656,10 @@ html[data-js="true"] [data-reveal].is-visible {
     display: none;
   }
 
+  .cinematic-hero {
+    min-height: 100svh;
+  }
+
   .site-header {
     left: 14px;
     padding: 8px 8px 8px 12px;
@@ -1683,17 +1687,26 @@ html[data-js="true"] [data-reveal].is-visible {
   }
 
   .hero-image {
-    transform: scale(1.04) translateY(var(--hero-shift));
+    height: 64svh;
+    inset: 0 0 auto;
+    overflow: hidden;
+    transform: none;
   }
 
   .hero-image img {
-    object-position: 69% center;
+    object-position: 90% center;
   }
 
   .hero-shade {
     background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.25), transparent 25%, rgba(0, 0, 0, 0.18) 45%, rgba(0, 0, 0, 0.96) 86%),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.45), transparent 66%);
+      linear-gradient(180deg, rgba(0, 0, 0, 0.2), transparent 30%, rgba(0, 0, 0, 0.16) 47%, rgba(0, 0, 0, 0.92) 64%, #000 76%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.22), transparent 70%);
+  }
+
+  .hero-grain {
+    background-position: 90% top;
+    background-size: auto 64svh;
+    background-repeat: no-repeat;
   }
 
   .hero-edition {
@@ -1707,10 +1720,10 @@ html[data-js="true"] [data-reveal].is-visible {
   }
 
   .hero-mobile-title {
-    bottom: 155px;
     display: block;
     left: 22px;
     position: absolute;
+    top: 55svh;
     z-index: 4;
   }
 
