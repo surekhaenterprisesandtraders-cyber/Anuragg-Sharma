@@ -50,6 +50,30 @@ const projects = [
   },
 ];
 
+const reelVideos = [
+  {
+    id: "W15zx06BL2Q",
+    label: "Featured trailer",
+    title: "Just 7 Days",
+    note: "Official trailer · 2:07",
+    className: "reel-featured",
+  },
+  {
+    id: "LmhtKr8xoN4",
+    label: "Feature film",
+    title: "Juni — Official Teaser",
+    note: "Official teaser · 2:34",
+    className: "",
+  },
+  {
+    id: "zvYvlGC2GHw",
+    label: "Web series",
+    title: "Two Great Masters",
+    note: "Series trailer · 5:30",
+    className: "",
+  },
+];
+
 const gallery = [
   {
     src: "/gallery/night-city.jpg",
@@ -140,6 +164,9 @@ const gallery = [
 export default function PortfolioExperience() {
   const siteRef = useRef<HTMLDivElement>(null);
   const [activeImage, setActiveImage] = useState<number | null>(null);
+  const [activeVideo, setActiveVideo] = useState<
+    (typeof reelVideos)[number] | null
+  >(null);
 
   useEffect(() => {
     const root = siteRef.current;
@@ -202,19 +229,22 @@ export default function PortfolioExperience() {
   }, []);
 
   useEffect(() => {
-    if (activeImage === null) return;
+    if (activeImage === null && activeVideo === null) return;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setActiveImage(null);
-      if (event.key === "ArrowRight") {
+      if (event.key === "Escape") {
+        setActiveImage(null);
+        setActiveVideo(null);
+      }
+      if (activeImage !== null && event.key === "ArrowRight") {
         setActiveImage((current) =>
           current === null ? null : (current + 1) % gallery.length,
         );
       }
-      if (event.key === "ArrowLeft") {
+      if (activeImage !== null && event.key === "ArrowLeft") {
         setActiveImage((current) =>
           current === null
             ? null
@@ -228,7 +258,7 @@ export default function PortfolioExperience() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [activeImage]);
+  }, [activeImage, activeVideo]);
 
   return (
     <div className="site-shell" ref={siteRef}>
@@ -247,6 +277,7 @@ export default function PortfolioExperience() {
         </a>
 
         <nav aria-label="Primary navigation">
+          <a href="#showreel">Showreel</a>
           <a href="#profile">Profile</a>
           <a href="#work">Selected work</a>
           <a href="#gallery">Gallery</a>
@@ -296,9 +327,9 @@ export default function PortfolioExperience() {
               <span>Actor profile</span>
               <p>Feature films · OTT · Television · Commercials</p>
             </div>
-            <a href="#profile">
-              Enter portfolio
-              <b aria-hidden="true">↓</b>
+            <a href="#showreel">
+              Watch the work
+              <b aria-hidden="true">▶</b>
             </a>
           </div>
 
@@ -307,6 +338,62 @@ export default function PortfolioExperience() {
             <i />
             <i />
             <i />
+          </div>
+        </section>
+
+        <section className="showreel-section" id="showreel">
+          <div className="showreel-heading" data-reveal>
+            <div>
+              <span className="eyebrow">Official channel / Selected screen work</span>
+              <h2>
+                Watch the
+                <br />
+                <em>work.</em>
+              </h2>
+            </div>
+            <div className="showreel-intro">
+              <span>Performance first</span>
+              <p>
+                A curated selection of official trailers and teasers—chosen to
+                show range, presence, and character on screen.
+              </p>
+              <a
+                href="https://www.youtube.com/@AnuraggSharmajuni/featured"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Visit official YouTube channel <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="reel-grid" data-reveal>
+            {reelVideos.map((video, index) => (
+              <button
+                className={`reel-card ${video.className}`}
+                key={video.id}
+                onClick={() => setActiveVideo(video)}
+                aria-label={`Play ${video.title}`}
+              >
+                <img
+                  src={`https://i.ytimg.com/vi/${video.id}/maxresdefault.jpg`}
+                  alt=""
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+                <span className="reel-card-shade" aria-hidden="true" />
+                <span className="reel-card-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="reel-play" aria-hidden="true">
+                  ▶
+                </span>
+                <span className="reel-card-copy">
+                  <small>{video.label}</small>
+                  <b>{video.title}</b>
+                  <i>{video.note}</i>
+                </span>
+              </button>
+            ))}
           </div>
         </section>
 
@@ -673,6 +760,35 @@ export default function PortfolioExperience() {
             >
               →
             </button>
+          </div>
+        </div>
+      )}
+
+      {activeVideo !== null && (
+        <div
+          className="video-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${activeVideo.title} video player`}
+        >
+          <button
+            className="video-modal-close"
+            onClick={() => setActiveVideo(null)}
+            aria-label="Close video"
+          >
+            Close <span aria-hidden="true">×</span>
+          </button>
+          <div className="video-modal-frame">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${activeVideo.id}?autoplay=1&rel=0`}
+              title={activeVideo.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+          <div className="video-modal-meta">
+            <span>{activeVideo.label}</span>
+            <b>{activeVideo.title}</b>
           </div>
         </div>
       )}
