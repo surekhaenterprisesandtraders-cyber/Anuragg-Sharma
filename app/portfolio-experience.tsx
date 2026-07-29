@@ -52,24 +52,24 @@ const projects = [
 
 const reelVideos = [
   {
-    id: "W15zx06BL2Q",
-    label: "Featured trailer",
-    title: "Just 7 Days",
-    note: "Official trailer · 2:07",
-    className: "reel-featured",
-  },
-  {
     id: "LmhtKr8xoN4",
     label: "Feature film",
     title: "Juni — Official Teaser",
     note: "Official teaser · 2:34",
-    className: "",
+    className: "reel-featured",
   },
   {
     id: "zvYvlGC2GHw",
     label: "Web series",
     title: "Two Great Masters",
     note: "Series trailer · 5:30",
+    className: "",
+  },
+  {
+    id: "U8mrzLBS5es",
+    label: "Selected performance",
+    title: "Trust In GOD and Do The Right",
+    note: "Official video",
     className: "",
   },
 ];
