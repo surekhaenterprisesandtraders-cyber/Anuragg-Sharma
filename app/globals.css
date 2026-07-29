@@ -6,8 +6,8 @@
   --ivory: #f0ede6;
   --paper: #e5dfd4;
   --white: #fff;
-  --acid: #e2f33f;
-  --bronze: #bd9157;
+  --acid: #c29a2e;
+  --bronze: #9b7244;
   --muted: rgba(255, 255, 255, 0.54);
   --line-light: rgba(255, 255, 255, 0.16);
   --line-dark: rgba(5, 5, 5, 0.17);
@@ -82,7 +82,7 @@ img {
 }
 
 .cursor-aura {
-  background: radial-gradient(circle, rgba(226, 243, 63, 0.09), transparent 68%);
+  background: radial-gradient(circle, rgba(194, 154, 46, 0.1), transparent 68%);
   border-radius: 50%;
   height: 360px;
   left: 0;
@@ -319,7 +319,7 @@ img {
 
 .availability i {
   background: var(--acid);
-  box-shadow: 0 0 0 6px rgba(226, 243, 63, 0.13);
+  box-shadow: 0 0 0 6px rgba(194, 154, 46, 0.14);
   height: 7px;
   width: 7px;
 }
@@ -471,7 +471,7 @@ img {
 }
 
 .statement-inner > p em {
-  color: var(--ivory);
+  color: #5f430d;
   font-weight: 400;
 }
 
@@ -1271,7 +1271,7 @@ img {
 }
 
 .range-heading h2 em {
-  color: var(--ivory);
+  color: #5f430d;
 }
 
 .range-grid {
@@ -1426,7 +1426,7 @@ img {
 
 .contact-orbit i:nth-child(3) {
   background: radial-gradient(circle, rgba(189, 145, 87, 0.11), transparent 68%);
-  border-color: rgba(226, 243, 63, 0.1);
+  border-color: rgba(194, 154, 46, 0.13);
   inset: 25%;
 }
 
