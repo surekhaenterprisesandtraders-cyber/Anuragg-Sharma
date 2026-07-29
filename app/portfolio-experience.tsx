@@ -77,6 +77,32 @@ const reelVideos = [
   },
 ];
 
+const castingFacts = [
+  { label: "Playing age", value: "32–33 years" },
+  { label: "Height", value: "5′8″ / 173 cm" },
+  { label: "Weight", value: "79 kg" },
+  { label: "Body type", value: "Average fit" },
+  { label: "Hair", value: "Black" },
+  { label: "Eyes", value: "Dark brown" },
+];
+
+const castingSkills = [
+  "Natural acting",
+  "Emotional performance",
+  "Dialogue delivery",
+  "Action & fight",
+  "Haryanvi accent",
+  "Bike & car driving",
+];
+
+const castingLooks = [
+  "Intense & rugged",
+  "Stylish & modern",
+  "Village / Haryanvi",
+  "Romantic & emotional",
+  "Versatile & adaptable",
+];
+
 const gallery = [
   {
     src: "/gallery/night-city.jpg",
@@ -282,6 +308,7 @@ export default function PortfolioExperience() {
         <nav aria-label="Primary navigation">
           <a href="#showreel">Showreel</a>
           <a href="#profile">Profile</a>
+          <a href="#casting">Casting</a>
           <a href="#work">Selected work</a>
           <a href="#gallery">Gallery</a>
           <a href="#credentials">Credentials</a>
@@ -454,7 +481,7 @@ export default function PortfolioExperience() {
                 <span>Portrait / AS–02</span>
               </div>
               <div className="portrait-caption">
-                <span>Based in India</span>
+                <span>Based in Chandigarh</span>
                 <span>Open to international productions</span>
               </div>
             </div>
@@ -497,6 +524,103 @@ export default function PortfolioExperience() {
                 <p>{item.note}</p>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section className="casting-profile" id="casting">
+          <div className="casting-heading" data-reveal>
+            <div>
+              <span className="eyebrow">Casting profile / At a glance</span>
+              <h2>
+                Ready for
+                <br />
+                the <em>role.</em>
+              </h2>
+            </div>
+            <p>
+              A concise casting snapshot for filmmakers, producers, and casting
+              teams—covering screen age, physical profile, languages, and
+              performance strengths.
+            </p>
+          </div>
+
+          <div className="casting-layout">
+            <div className="casting-visuals" data-reveal>
+              <figure className="casting-image casting-image-main">
+                <img
+                  src="/casting/anuragg-casting-closeup.webp"
+                  alt="Anuragg Sharma casting close-up"
+                />
+                <figcaption>
+                  <span>Current look</span>
+                  <b>AS / Casting 01</b>
+                </figcaption>
+              </figure>
+              <figure className="casting-image casting-image-character">
+                <img
+                  src="/casting/anuragg-character-portrait.webp"
+                  alt="Anuragg Sharma character portrait"
+                />
+                <figcaption>
+                  <span>Character range</span>
+                  <b>AS / Casting 02</b>
+                </figcaption>
+              </figure>
+            </div>
+
+            <div className="casting-details">
+              <div className="casting-facts">
+                {castingFacts.map((fact, index) => (
+                  <article
+                    key={fact.label}
+                    data-reveal
+                    style={{ transitionDelay: `${index * 45}ms` }}
+                  >
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <small>{fact.label}</small>
+                    <strong>{fact.value}</strong>
+                  </article>
+                ))}
+              </div>
+
+              <div className="casting-capabilities" data-reveal>
+                <div>
+                  <span>Languages</span>
+                  <ul>
+                    <li>Hindi</li>
+                    <li>Haryanvi</li>
+                    <li>English</li>
+                  </ul>
+                </div>
+                <div>
+                  <span>Performance skills</span>
+                  <ul>
+                    {castingSkills.map((skill) => (
+                      <li key={skill}>{skill}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <span>Looks & range</span>
+                  <ul>
+                    {castingLooks.map((look) => (
+                      <li key={look}>{look}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="casting-availability" data-reveal>
+                <div>
+                  <span>Base</span>
+                  <strong>Chandigarh, India</strong>
+                  <small>Open to relocate · Pan India</small>
+                </div>
+                <a href="#contact">
+                  Check availability <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
