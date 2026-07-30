@@ -133,6 +133,13 @@ const gallery = [
     position: "center",
   },
   {
+    src: "/gallery/road-presence.webp",
+    title: "Road presence",
+    note: "Editorial lifestyle",
+    layout: "gallery-wide",
+    position: "center",
+  },
+  {
     src: "/gallery/red-car.webp",
     title: "Graphic frame",
     note: "On-set portrait",
@@ -159,6 +166,13 @@ const gallery = [
     note: "Live presence",
     layout: "gallery-wide",
     position: "center",
+  },
+  {
+    src: "/gallery/devotional-strength.webp",
+    title: "Devotional strength",
+    note: "Documentary portrait",
+    layout: "gallery-tall",
+    position: "center 34%",
   },
   {
     src: "/gallery/character-green.webp",
@@ -817,7 +831,9 @@ export default function PortfolioExperience() {
               <br />
               It is a point of view.
             </p>
-            <span>Archive / 01—12</span>
+            <span>
+              Archive / 01—{String(gallery.length).padStart(2, "0")}
+            </span>
           </div>
         </section>
 
