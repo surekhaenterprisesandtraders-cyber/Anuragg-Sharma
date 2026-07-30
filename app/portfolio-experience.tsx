@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useCallback,
+  useRef,
+  useState,
+  type CSSProperties,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
 
 const formats = [
   "Feature films",
@@ -192,10 +199,67 @@ const gallery = [
 
 export default function PortfolioExperience() {
   const siteRef = useRef<HTMLDivElement>(null);
+  const swipeStartRef = useRef<{ x: number; y: number } | null>(null);
   const [activeImage, setActiveImage] = useState<number | null>(null);
   const [activeVideo, setActiveVideo] = useState<
     (typeof reelVideos)[number] | null
   >(null);
+  const [swipeOffset, setSwipeOffset] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
+
+  const moveGallery = useCallback((direction: -1 | 1) => {
+    setActiveImage((current) =>
+      current === null
+        ? null
+        : (current + direction + gallery.length) % gallery.length,
+    );
+  }, []);
+
+  const resetSwipe = () => {
+    swipeStartRef.current = null;
+    setSwipeOffset(0);
+    setIsSwiping(false);
+  };
+
+  const onGalleryPointerDown = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    if (event.pointerType === "mouse") return;
+    swipeStartRef.current = { x: event.clientX, y: event.clientY };
+    setIsSwiping(true);
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const onGalleryPointerMove = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    const start = swipeStartRef.current;
+    if (!start || event.pointerType === "mouse") return;
+
+    const deltaX = event.clientX - start.x;
+    const deltaY = event.clientY - start.y;
+    if (Math.abs(deltaY) > Math.abs(deltaX)) return;
+
+    setSwipeOffset(Math.max(-140, Math.min(140, deltaX)));
+  };
+
+  const onGalleryPointerEnd = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    const start = swipeStartRef.current;
+    if (!start || event.pointerType === "mouse") return;
+
+    const deltaX = event.clientX - start.x;
+    const deltaY = event.clientY - start.y;
+    if (Math.abs(deltaX) >= 56 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      moveGallery(deltaX < 0 ? 1 : -1);
+    }
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    resetSwipe();
+  };
 
   useEffect(() => {
     const root = siteRef.current;
@@ -263,22 +327,27 @@ export default function PortfolioExperience() {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
+    if (activeImage !== null) {
+      const adjacentImages = [
+        (activeImage - 1 + gallery.length) % gallery.length,
+        (activeImage + 1) % gallery.length,
+      ];
+      adjacentImages.forEach((index) => {
+        const image = new Image();
+        image.src = gallery[index].src;
+      });
+    }
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setActiveImage(null);
         setActiveVideo(null);
       }
       if (activeImage !== null && event.key === "ArrowRight") {
-        setActiveImage((current) =>
-          current === null ? null : (current + 1) % gallery.length,
-        );
+        moveGallery(1);
       }
       if (activeImage !== null && event.key === "ArrowLeft") {
-        setActiveImage((current) =>
-          current === null
-            ? null
-            : (current - 1 + gallery.length) % gallery.length,
-        );
+        moveGallery(-1);
       }
     };
 
@@ -287,7 +356,7 @@ export default function PortfolioExperience() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [activeImage, activeVideo]);
+  }, [activeImage, activeVideo, moveGallery]);
 
   return (
     <div className="site-shell" ref={siteRef}>
@@ -878,14 +947,27 @@ export default function PortfolioExperience() {
           >
             Close <span aria-hidden="true">×</span>
           </button>
-          <div className="lightbox-image">
+          <div
+            className={`lightbox-image ${isSwiping ? "is-swiping" : ""}`}
+            onPointerDown={onGalleryPointerDown}
+            onPointerMove={onGalleryPointerMove}
+            onPointerUp={onGalleryPointerEnd}
+            onPointerCancel={resetSwipe}
+            style={
+              {
+                "--swipe-x": `${swipeOffset}px`,
+              } as CSSProperties
+            }
+          >
             <img
+              key={gallery[activeImage].src}
               src={gallery[activeImage].src}
               alt={`Anuragg Sharma — ${gallery[activeImage].title}`}
               decoding="async"
+              draggable={false}
             />
           </div>
-          <div className="lightbox-meta">
+          <div className="lightbox-meta" aria-live="polite">
             <span>
               {String(activeImage + 1).padStart(2, "0")} /{" "}
               {String(gallery.length).padStart(2, "0")}
@@ -895,19 +977,20 @@ export default function PortfolioExperience() {
               <small>{gallery[activeImage].note}</small>
             </div>
           </div>
+          <div className="lightbox-swipe-hint" aria-hidden="true">
+            <span>←</span>
+            Swipe to explore
+            <span>→</span>
+          </div>
           <div className="lightbox-controls">
             <button
-              onClick={() =>
-                setActiveImage(
-                  (activeImage - 1 + gallery.length) % gallery.length,
-                )
-              }
+              onClick={() => moveGallery(-1)}
               aria-label="Previous image"
             >
               ←
             </button>
             <button
-              onClick={() => setActiveImage((activeImage + 1) % gallery.length)}
+              onClick={() => moveGallery(1)}
               aria-label="Next image"
             >
               →
