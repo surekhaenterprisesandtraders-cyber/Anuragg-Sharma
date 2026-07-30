@@ -124,6 +124,7 @@ type GalleryFilter = (typeof galleryFilters)[number]["id"];
 const gallery = [
   {
     src: "/gallery/night-city.webp",
+    fullSrc: "/gallery/night-city.jpg",
     title: "After dark",
     note: "Urban portrait",
     category: "lifestyle",
@@ -132,6 +133,7 @@ const gallery = [
   },
   {
     src: "/gallery/editorial-chair.webp",
+    fullSrc: "/gallery/editorial-chair.jpg",
     title: "Quiet authority",
     note: "Editorial portrait",
     category: "headshots",
@@ -140,6 +142,7 @@ const gallery = [
   },
   {
     src: "/gallery/urban-ride.webp",
+    fullSrc: "/gallery/urban-ride.jpg",
     title: "City pulse",
     note: "Contemporary character",
     category: "lifestyle",
@@ -148,6 +151,7 @@ const gallery = [
   },
   {
     src: "/gallery/road-presence.webp",
+    fullSrc: "/gallery/road-presence.webp",
     title: "Road presence",
     note: "Editorial lifestyle",
     category: "lifestyle",
@@ -156,6 +160,7 @@ const gallery = [
   },
   {
     src: "/gallery/red-car.webp",
+    fullSrc: "/gallery/red-car.jpg",
     title: "Graphic frame",
     note: "On-set portrait",
     category: "on-set",
@@ -164,6 +169,7 @@ const gallery = [
   },
   {
     src: "/gallery/lowlight-frame.webp",
+    fullSrc: "/gallery/lowlight-frame.jpg",
     title: "Inner light",
     note: "Character study",
     category: "character",
@@ -172,6 +178,7 @@ const gallery = [
   },
   {
     src: "/gallery/rooftop-closeup.webp",
+    fullSrc: "/gallery/rooftop-closeup.jpg",
     title: "Golden hour",
     note: "Close-up study",
     category: "headshots",
@@ -180,6 +187,7 @@ const gallery = [
   },
   {
     src: "/gallery/on-stage.webp",
+    fullSrc: "/gallery/on-stage.jpg",
     title: "In the moment",
     note: "Live presence",
     category: "on-set",
@@ -188,6 +196,7 @@ const gallery = [
   },
   {
     src: "/gallery/devotional-strength.webp",
+    fullSrc: "/gallery/devotional-strength-full.jpeg",
     title: "Devotional strength",
     note: "Documentary portrait",
     category: "character",
@@ -196,6 +205,7 @@ const gallery = [
   },
   {
     src: "/gallery/character-green.webp",
+    fullSrc: "/gallery/character-green.jpg",
     title: "Transformation",
     note: "Character look",
     category: "character",
@@ -204,6 +214,7 @@ const gallery = [
   },
   {
     src: "/gallery/studio-smile.webp",
+    fullSrc: "/gallery/studio-smile.jpg",
     title: "Warmth",
     note: "Studio portrait",
     category: "headshots",
@@ -212,6 +223,7 @@ const gallery = [
   },
   {
     src: "/gallery/character-portrait.webp",
+    fullSrc: "/gallery/character-portrait.jpg",
     title: "Unfiltered",
     note: "Look study",
     category: "headshots",
@@ -220,6 +232,7 @@ const gallery = [
   },
   {
     src: "/gallery/garden-editorial.webp",
+    fullSrc: "/gallery/garden-editorial.jpg",
     title: "Off camera",
     note: "Editorial moment",
     category: "lifestyle",
@@ -228,6 +241,7 @@ const gallery = [
   },
   {
     src: "/gallery/action-frame.webp",
+    fullSrc: "/gallery/action-frame.jpg",
     title: "Kinetic",
     note: "Performance frame",
     category: "on-set",
@@ -383,7 +397,7 @@ export default function PortfolioExperience() {
       ];
       adjacentImages.forEach((index) => {
         const image = new Image();
-        image.src = visibleGallery[index].src;
+        image.src = visibleGallery[index].fullSrc;
       });
     }
 
@@ -1039,8 +1053,8 @@ export default function PortfolioExperience() {
             }
           >
             <img
-              key={visibleGallery[activeImage].src}
-              src={visibleGallery[activeImage].src}
+              key={visibleGallery[activeImage].fullSrc}
+              src={visibleGallery[activeImage].fullSrc}
               alt={`Anuragg Sharma — ${visibleGallery[activeImage].title}`}
               decoding="async"
               draggable={false}
