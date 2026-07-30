@@ -94,6 +94,11 @@ export default function CastingEnquiryPage() {
           <input type="hidden" name="_template" value="table" />
           <input
             type="hidden"
+            name="_autoresponse"
+            value="Thank you for contacting Anuragg Sharma’s team. We have received your casting enquiry and will review the project details. A member of the team will respond using the contact information you provided. Regards, Anuragg Sharma — Casting Desk."
+          />
+          <input
+            type="hidden"
             name="_next"
             value={`${siteConfig.url}/enquiry-success`}
           />
