@@ -1007,6 +1007,24 @@ export default function PortfolioExperience() {
               </span>
               <b aria-hidden="true">↗</b>
             </a>
+            <div className="contact-socials" aria-label="Anuragg Sharma social profiles">
+              <a
+                href="https://www.instagram.com/itsanuraggsharma"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="/instagram.svg" alt="" aria-hidden="true" />
+                Instagram
+              </a>
+              <a
+                href="https://www.youtube.com/@AnuraggSharmajuni"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="/youtube.svg" alt="" aria-hidden="true" />
+                YouTube
+              </a>
+            </div>
           </div>
 
           <div className="contact-details">
