@@ -37,7 +37,7 @@ const projects = [
     description:
       "A contemporary series inspired by the enduring philosophies of Swami Vivekananda and Paramahansa Yogananda.",
     className: "project-masters",
-    image: "/two-great-masters.png",
+    image: "/two-great-masters.webp",
   },
   {
     number: "03",
@@ -105,84 +105,84 @@ const castingLooks = [
 
 const gallery = [
   {
-    src: "/gallery/night-city.jpg",
+    src: "/gallery/night-city.webp",
     title: "After dark",
     note: "Urban portrait",
     layout: "gallery-tall",
     position: "center",
   },
   {
-    src: "/gallery/editorial-chair.jpg",
+    src: "/gallery/editorial-chair.webp",
     title: "Quiet authority",
     note: "Editorial portrait",
     layout: "gallery-tall",
     position: "center 24%",
   },
   {
-    src: "/gallery/urban-ride.jpg",
+    src: "/gallery/urban-ride.webp",
     title: "City pulse",
     note: "Contemporary character",
     layout: "gallery-compact",
     position: "center",
   },
   {
-    src: "/gallery/red-car.jpg",
+    src: "/gallery/red-car.webp",
     title: "Graphic frame",
     note: "On-set portrait",
     layout: "gallery-wide",
     position: "center",
   },
   {
-    src: "/gallery/lowlight-frame.jpg",
+    src: "/gallery/lowlight-frame.webp",
     title: "Inner light",
     note: "Character study",
     layout: "gallery-wide",
     position: "center",
   },
   {
-    src: "/gallery/rooftop-closeup.jpg",
+    src: "/gallery/rooftop-closeup.webp",
     title: "Golden hour",
     note: "Close-up study",
     layout: "gallery-compact",
     position: "center",
   },
   {
-    src: "/gallery/on-stage.jpg",
+    src: "/gallery/on-stage.webp",
     title: "In the moment",
     note: "Live presence",
     layout: "gallery-wide",
     position: "center",
   },
   {
-    src: "/gallery/character-green.jpg",
+    src: "/gallery/character-green.webp",
     title: "Transformation",
     note: "Character look",
     layout: "gallery-tall",
     position: "center 58%",
   },
   {
-    src: "/gallery/studio-smile.jpg",
+    src: "/gallery/studio-smile.webp",
     title: "Warmth",
     note: "Studio portrait",
     layout: "gallery-compact",
     position: "center",
   },
   {
-    src: "/gallery/character-portrait.jpg",
+    src: "/gallery/character-portrait.webp",
     title: "Unfiltered",
     note: "Look study",
     layout: "gallery-tall",
     position: "center 20%",
   },
   {
-    src: "/gallery/garden-editorial.jpg",
+    src: "/gallery/garden-editorial.webp",
     title: "Off camera",
     note: "Editorial moment",
     layout: "gallery-wide",
     position: "center",
   },
   {
-    src: "/gallery/action-frame.jpg",
+    src: "/gallery/action-frame.webp",
     title: "Kinetic",
     note: "Performance frame",
     layout: "gallery-wide",
@@ -324,7 +324,13 @@ export default function PortfolioExperience() {
       <main>
         <section className="cinematic-hero" id="top">
           <div className="hero-image" aria-hidden="true">
-            <img src="/hero-cinematic.png" alt="" />
+            <img
+              src="/hero-cinematic.webp"
+              alt=""
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
           </div>
           <div className="hero-shade" aria-hidden="true" />
           <div className="hero-grain" aria-hidden="true" />
@@ -408,7 +414,8 @@ export default function PortfolioExperience() {
                 <img
                   src={`https://i.ytimg.com/vi/${video.id}/${video.thumbnail}`}
                   alt=""
-                  loading={index === 0 ? "eager" : "lazy"}
+                  loading="lazy"
+                  decoding="async"
                 />
                 <span className="reel-card-shade" aria-hidden="true" />
                 <span className="reel-card-number">
@@ -475,8 +482,10 @@ export default function PortfolioExperience() {
             <div className="dossier-portrait" data-reveal>
               <div className="portrait-frame">
                 <img
-                  src="/anurag-representation.jpg"
+                  src="/anurag-representation.webp"
                   alt="Anuragg Sharma in a cinematic portrait"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <span>Portrait / AS–02</span>
               </div>
@@ -550,6 +559,8 @@ export default function PortfolioExperience() {
                 <img
                   src="/casting/anuragg-casting-closeup.webp"
                   alt="Anuragg Sharma casting close-up"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <figcaption>
                   <span>Current look</span>
@@ -560,6 +571,8 @@ export default function PortfolioExperience() {
                 <img
                   src="/casting/anuragg-character-portrait.webp"
                   alt="Anuragg Sharma character portrait"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <figcaption>
                   <span>Character range</span>
@@ -653,7 +666,12 @@ export default function PortfolioExperience() {
                 </div>
                 <div className="project-art">
                   {project.image ? (
-                    <img src={project.image} alt={`${project.title} poster`} />
+                    <img
+                      src={project.image}
+                      alt={`${project.title} poster`}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   ) : (
                     <div className="project-lettering" aria-hidden="true">
                       <small>Anuragg Sharma in</small>
@@ -709,6 +727,7 @@ export default function PortfolioExperience() {
                   alt={`Anuragg Sharma — ${image.title}`}
                   style={{ objectPosition: image.position }}
                   loading="lazy"
+                  decoding="async"
                 />
                 <span className="gallery-number">
                   {String(index + 1).padStart(2, "0")}
@@ -759,7 +778,12 @@ export default function PortfolioExperience() {
 
         <section className="professional" id="credentials">
           <div className="professional-image" data-reveal>
-            <img src="/anurag-sharma.jpg" alt="Portrait of Anuragg Sharma" />
+            <img
+              src="/anurag-sharma.jpg"
+              alt="Portrait of Anuragg Sharma"
+              loading="lazy"
+              decoding="async"
+            />
             <div>
               <span>Cinematic presence</span>
               <span>Professional discipline</span>
@@ -858,6 +882,7 @@ export default function PortfolioExperience() {
             <img
               src={gallery[activeImage].src}
               alt={`Anuragg Sharma — ${gallery[activeImage].title}`}
+              decoding="async"
             />
           </div>
           <div className="lightbox-meta">
