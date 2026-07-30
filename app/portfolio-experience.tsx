@@ -3,6 +3,7 @@
 import {
   useEffect,
   useCallback,
+  useMemo,
   useRef,
   useState,
   type CSSProperties,
@@ -110,11 +111,22 @@ const castingLooks = [
   "Versatile & adaptable",
 ];
 
+const galleryFilters = [
+  { id: "all", label: "All looks" },
+  { id: "headshots", label: "Headshots" },
+  { id: "character", label: "Character looks" },
+  { id: "on-set", label: "On set" },
+  { id: "lifestyle", label: "Lifestyle" },
+] as const;
+
+type GalleryFilter = (typeof galleryFilters)[number]["id"];
+
 const gallery = [
   {
     src: "/gallery/night-city.webp",
     title: "After dark",
     note: "Urban portrait",
+    category: "lifestyle",
     layout: "gallery-tall",
     position: "center",
   },
@@ -122,6 +134,7 @@ const gallery = [
     src: "/gallery/editorial-chair.webp",
     title: "Quiet authority",
     note: "Editorial portrait",
+    category: "headshots",
     layout: "gallery-tall",
     position: "center 24%",
   },
@@ -129,6 +142,7 @@ const gallery = [
     src: "/gallery/urban-ride.webp",
     title: "City pulse",
     note: "Contemporary character",
+    category: "lifestyle",
     layout: "gallery-compact",
     position: "center",
   },
@@ -136,6 +150,7 @@ const gallery = [
     src: "/gallery/road-presence.webp",
     title: "Road presence",
     note: "Editorial lifestyle",
+    category: "lifestyle",
     layout: "gallery-wide",
     position: "center",
   },
@@ -143,6 +158,7 @@ const gallery = [
     src: "/gallery/red-car.webp",
     title: "Graphic frame",
     note: "On-set portrait",
+    category: "on-set",
     layout: "gallery-wide",
     position: "center",
   },
@@ -150,6 +166,7 @@ const gallery = [
     src: "/gallery/lowlight-frame.webp",
     title: "Inner light",
     note: "Character study",
+    category: "character",
     layout: "gallery-wide",
     position: "center",
   },
@@ -157,6 +174,7 @@ const gallery = [
     src: "/gallery/rooftop-closeup.webp",
     title: "Golden hour",
     note: "Close-up study",
+    category: "headshots",
     layout: "gallery-compact",
     position: "center",
   },
@@ -164,6 +182,7 @@ const gallery = [
     src: "/gallery/on-stage.webp",
     title: "In the moment",
     note: "Live presence",
+    category: "on-set",
     layout: "gallery-wide",
     position: "center",
   },
@@ -171,6 +190,7 @@ const gallery = [
     src: "/gallery/devotional-strength.webp",
     title: "Devotional strength",
     note: "Documentary portrait",
+    category: "character",
     layout: "gallery-tall",
     position: "center 34%",
   },
@@ -178,6 +198,7 @@ const gallery = [
     src: "/gallery/character-green.webp",
     title: "Transformation",
     note: "Character look",
+    category: "character",
     layout: "gallery-tall",
     position: "center 58%",
   },
@@ -185,6 +206,7 @@ const gallery = [
     src: "/gallery/studio-smile.webp",
     title: "Warmth",
     note: "Studio portrait",
+    category: "headshots",
     layout: "gallery-compact",
     position: "center",
   },
@@ -192,6 +214,7 @@ const gallery = [
     src: "/gallery/character-portrait.webp",
     title: "Unfiltered",
     note: "Look study",
+    category: "headshots",
     layout: "gallery-tall",
     position: "center 20%",
   },
@@ -199,6 +222,7 @@ const gallery = [
     src: "/gallery/garden-editorial.webp",
     title: "Off camera",
     note: "Editorial moment",
+    category: "lifestyle",
     layout: "gallery-wide",
     position: "center",
   },
@@ -206,6 +230,7 @@ const gallery = [
     src: "/gallery/action-frame.webp",
     title: "Kinetic",
     note: "Performance frame",
+    category: "on-set",
     layout: "gallery-wide",
     position: "center",
   },
@@ -215,19 +240,29 @@ export default function PortfolioExperience() {
   const siteRef = useRef<HTMLDivElement>(null);
   const swipeStartRef = useRef<{ x: number; y: number } | null>(null);
   const [activeImage, setActiveImage] = useState<number | null>(null);
+  const [galleryFilter, setGalleryFilter] = useState<GalleryFilter>("all");
   const [activeVideo, setActiveVideo] = useState<
     (typeof reelVideos)[number] | null
   >(null);
   const [swipeOffset, setSwipeOffset] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
 
+  const visibleGallery = useMemo(
+    () =>
+      galleryFilter === "all"
+        ? gallery
+        : gallery.filter((image) => image.category === galleryFilter),
+    [galleryFilter],
+  );
+
   const moveGallery = useCallback((direction: -1 | 1) => {
     setActiveImage((current) =>
       current === null
         ? null
-        : (current + direction + gallery.length) % gallery.length,
+        : (current + direction + visibleGallery.length) %
+          visibleGallery.length,
     );
-  }, []);
+  }, [visibleGallery.length]);
 
   const resetSwipe = () => {
     swipeStartRef.current = null;
@@ -343,12 +378,12 @@ export default function PortfolioExperience() {
 
     if (activeImage !== null) {
       const adjacentImages = [
-        (activeImage - 1 + gallery.length) % gallery.length,
-        (activeImage + 1) % gallery.length,
+        (activeImage - 1 + visibleGallery.length) % visibleGallery.length,
+        (activeImage + 1) % visibleGallery.length,
       ];
       adjacentImages.forEach((index) => {
         const image = new Image();
-        image.src = gallery[index].src;
+        image.src = visibleGallery[index].src;
       });
     }
 
@@ -370,7 +405,7 @@ export default function PortfolioExperience() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [activeImage, activeVideo, moveGallery]);
+  }, [activeImage, activeVideo, moveGallery, visibleGallery]);
 
   return (
     <div className="site-shell" ref={siteRef}>
@@ -795,14 +830,41 @@ export default function PortfolioExperience() {
             </div>
           </div>
 
+          <div className="gallery-filters" aria-label="Filter gallery by look">
+            {galleryFilters.map((filter) => {
+              const count =
+                filter.id === "all"
+                  ? gallery.length
+                  : gallery.filter((image) => image.category === filter.id)
+                      .length;
+
+              return (
+                <button
+                  key={filter.id}
+                  type="button"
+                  className={galleryFilter === filter.id ? "is-active" : ""}
+                  aria-pressed={galleryFilter === filter.id}
+                  onClick={() => {
+                    setGalleryFilter(filter.id);
+                    setActiveImage(null);
+                  }}
+                >
+                  <span>{filter.label}</span>
+                  <small>{String(count).padStart(2, "0")}</small>
+                </button>
+              );
+            })}
+          </div>
+
           <div className="gallery-grid">
-            {gallery.map((image, index) => (
+            {visibleGallery.map((image, index) => (
               <button
-                className={`gallery-frame ${image.layout}`}
+                className={`gallery-frame gallery-filtered-frame ${image.layout}`}
                 key={image.src}
                 onClick={() => setActiveImage(index)}
-                data-reveal
-                style={{ transitionDelay: `${(index % 4) * 55}ms` }}
+                style={{
+                  animationDelay: `${(index % 4) * 55}ms`,
+                }}
                 aria-label={`Open ${image.title} image`}
               >
                 <img
@@ -832,7 +894,8 @@ export default function PortfolioExperience() {
               It is a point of view.
             </p>
             <span>
-              Archive / 01—{String(gallery.length).padStart(2, "0")}
+              Showing / {String(visibleGallery.length).padStart(2, "0")} of{" "}
+              {String(gallery.length).padStart(2, "0")}
             </span>
           </div>
         </section>
@@ -954,7 +1017,7 @@ export default function PortfolioExperience() {
           className="lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label={`${gallery[activeImage].title} gallery image`}
+          aria-label={`${visibleGallery[activeImage].title} gallery image`}
         >
           <button
             className="lightbox-close"
@@ -976,9 +1039,9 @@ export default function PortfolioExperience() {
             }
           >
             <img
-              key={gallery[activeImage].src}
-              src={gallery[activeImage].src}
-              alt={`Anuragg Sharma — ${gallery[activeImage].title}`}
+              key={visibleGallery[activeImage].src}
+              src={visibleGallery[activeImage].src}
+              alt={`Anuragg Sharma — ${visibleGallery[activeImage].title}`}
               decoding="async"
               draggable={false}
             />
@@ -986,11 +1049,11 @@ export default function PortfolioExperience() {
           <div className="lightbox-meta" aria-live="polite">
             <span>
               {String(activeImage + 1).padStart(2, "0")} /{" "}
-              {String(gallery.length).padStart(2, "0")}
+              {String(visibleGallery.length).padStart(2, "0")}
             </span>
             <div>
-              <b>{gallery[activeImage].title}</b>
-              <small>{gallery[activeImage].note}</small>
+              <b>{visibleGallery[activeImage].title}</b>
+              <small>{visibleGallery[activeImage].note}</small>
             </div>
           </div>
           <div className="lightbox-swipe-hint" aria-hidden="true">
