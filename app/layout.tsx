@@ -1,52 +1,83 @@
-import type { Metadata } from "next";
-import { headers } from "next/headers";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { siteConfig } from "./site-config";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const requestHeaders = await headers();
-  const host =
-    requestHeaders.get("x-forwarded-host") ??
-    requestHeaders.get("host") ??
-    "localhost:3000";
-  const protocol =
-    requestHeaders.get("x-forwarded-proto") ??
-    (host.includes("localhost") ? "http" : "https");
-  const origin = `${protocol}://${host}`;
-
-  return {
-    title: "Anuragg Sharma — Every frame. Fully lived.",
-    description:
-      "Official portfolio of Indian actor Anuragg Sharma. Feature films, OTT, web series, television, music videos, and commercials.",
-    keywords: [
-      "Anuragg Sharma",
-      "Anurag Sharma actor",
-      "Indian actor",
-      "Juni The Last Prayer",
-      "Two Great Masters",
-      "Uddand",
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: "Anuragg Sharma — Every frame. Fully lived.",
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  category: "Actor Portfolio",
+  keywords: [
+    "Anuragg Sharma",
+    "Anurag Sharma actor",
+    "Indian actor",
+    "Haryana actor",
+    "Chandigarh actor",
+    "Juni The Last Player",
+    "Two Great Masters",
+    "Uddand",
+    "OTT actor India",
+    "Hindi actor portfolio",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    title: "Anuragg Sharma — Indian Actor",
+    description: siteConfig.description,
+    url: "/",
+    siteName: siteConfig.name,
+    type: "profile",
+    locale: "en_IN",
+    images: [
+      {
+        url: "/og.png",
+        width: 1731,
+        height: 909,
+        alt: "Anuragg Sharma — Indian Actor",
+      },
     ],
-    openGraph: {
-      title: "Anuragg Sharma — Every frame. Fully lived.",
-      description:
-        "Indian actor working across feature films, OTT, television, music videos, and commercials.",
-      type: "website",
-      images: [
-        {
-          url: `${origin}/og.png`,
-          width: 1731,
-          height: 909,
-          alt: "Anuragg Sharma — Indian Actor",
-        },
-      ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Anuragg Sharma — Indian Actor",
+    description: "Every frame. Fully lived.",
+    images: ["/og.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
-    twitter: {
-      card: "summary_large_image",
-      title: "Anuragg Sharma — Indian Actor",
-      description: "Every frame. Fully lived.",
-      images: [`${origin}/og.png`],
-    },
-  };
-}
+  },
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
+  manifest: "/manifest.webmanifest",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#070706",
+  colorScheme: "dark",
+};
 
 export default function RootLayout({
   children,
