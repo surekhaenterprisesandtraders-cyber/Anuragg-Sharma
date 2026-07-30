@@ -397,7 +397,7 @@ export default function PortfolioExperience() {
           <a href="#credentials">Credentials</a>
         </nav>
 
-        <a className="header-contact" href="#contact">
+        <a className="header-contact" href="/casting-enquiry">
           <i aria-hidden="true" />
           Casting enquiry
           <span aria-hidden="true">↗</span>
@@ -712,7 +712,7 @@ export default function PortfolioExperience() {
                   <strong>Chandigarh, India</strong>
                   <small>Open to relocate · Pan India</small>
                 </div>
-                <a href="#contact">
+                <a href="/casting-enquiry">
                   Check availability <span aria-hidden="true">↗</span>
                 </a>
               </div>
@@ -921,7 +921,7 @@ export default function PortfolioExperience() {
             </h2>
             <a
               className="contact-disc"
-              href="mailto:anushvats@gmail.com?subject=Casting%20enquiry%20for%20Anuragg%20Sharma"
+              href="/casting-enquiry"
             >
               <span>
                 Request
