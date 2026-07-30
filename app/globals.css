@@ -1520,6 +1520,20 @@ img {
   padding: 135px 3vw 95px;
 }
 
+@media (min-width: 701px) {
+  .selected-work {
+    padding-bottom: 32px;
+  }
+
+  .project-panel:last-child {
+    padding-bottom: 36px;
+  }
+
+  .gallery-section {
+    padding-top: 88px;
+  }
+}
+
 .gallery-heading {
   align-items: end;
   display: grid;
