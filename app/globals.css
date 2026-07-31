@@ -267,7 +267,8 @@ img {
 }
 
 .hero-grain {
-  background-image: url("/hero-cinematic.png");
+  /* Reuse the already-loaded WebP instead of downloading the 1.8 MB PNG again. */
+  background-image: url("/hero-cinematic.webp");
   background-size: cover;
   filter: contrast(1.04) saturate(0);
   mix-blend-mode: soft-light;

@@ -350,15 +350,35 @@ export default function PortfolioExperience() {
     const header = root.querySelector<HTMLElement>(".site-header");
     const aura = root.querySelector<HTMLElement>(".cursor-aura");
 
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = max > 0 ? window.scrollY / max : 0;
+    let frameId: number | null = null;
+    let scrollMax = Math.max(
+      document.documentElement.scrollHeight - window.innerHeight,
+      0,
+    );
+
+    const renderScrollState = () => {
+      const scrollY = window.scrollY;
+      const progress = scrollMax > 0 ? scrollY / scrollMax : 0;
       root.style.setProperty("--scroll-progress", `${progress}`);
       root.style.setProperty(
         "--hero-shift",
-        `${Math.min(window.scrollY * 0.09, 72)}px`,
+        `${Math.min(scrollY * 0.09, 72)}px`,
       );
-      header?.classList.toggle("is-scrolled", window.scrollY > 40);
+      header?.classList.toggle("is-scrolled", scrollY > 40);
+      frameId = null;
+    };
+
+    const onScroll = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(renderScrollState);
+    };
+
+    const onResize = () => {
+      scrollMax = Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        0,
+      );
+      onScroll();
     };
 
     const onPointerMove = (event: PointerEvent) => {
@@ -371,16 +391,19 @@ export default function PortfolioExperience() {
       if (aura) aura.style.opacity = "0";
     };
 
-    onScroll();
+    renderScrollState();
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     document.documentElement.addEventListener("mouseleave", onPointerLeave);
 
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
       window.removeEventListener("pointermove", onPointerMove);
       document.documentElement.removeEventListener("mouseleave", onPointerLeave);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
       delete document.documentElement.dataset.js;
     };
   }, []);
