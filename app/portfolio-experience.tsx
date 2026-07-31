@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   useEffect,
   useCallback,
@@ -456,12 +457,14 @@ export default function PortfolioExperience() {
       <main>
         <section className="cinematic-hero" id="top">
           <div className="hero-image" aria-hidden="true">
-            <img
+            <Image
               src="/hero-cinematic.webp"
               alt=""
-              loading="eager"
+              fill
+              quality={100}
+              sizes="100vw"
+              priority
               fetchPriority="high"
-              decoding="async"
             />
           </div>
           <div className="hero-shade" aria-hidden="true" />
@@ -543,11 +546,12 @@ export default function PortfolioExperience() {
                 onClick={() => setActiveVideo(video)}
                 aria-label={`Play ${video.title}`}
               >
-                <img
+                <Image
                   src={`https://i.ytimg.com/vi/${video.id}/${video.thumbnail}`}
                   alt=""
-                  loading="lazy"
-                  decoding="async"
+                  fill
+                  quality={100}
+                  sizes="(max-width: 700px) 100vw, 33vw"
                 />
                 <span className="reel-card-shade" aria-hidden="true" />
                 <span className="reel-card-number">
@@ -613,11 +617,13 @@ export default function PortfolioExperience() {
           <div className="dossier-grid">
             <div className="dossier-portrait" data-reveal>
               <div className="portrait-frame">
-                <img
+                <Image
                   src="/anurag-representation.webp"
                   alt="Anuragg Sharma in a cinematic portrait"
-                  loading="lazy"
-                  decoding="async"
+                  width={914}
+                  height={1280}
+                  quality={100}
+                  sizes="(max-width: 700px) 100vw, 40vw"
                 />
                 <span>Portrait / AS–02</span>
               </div>
@@ -688,11 +694,13 @@ export default function PortfolioExperience() {
           <div className="casting-layout">
             <div className="casting-visuals" data-reveal>
               <figure className="casting-image casting-image-main">
-                <img
+                <Image
                   src="/casting/anuragg-casting-closeup.webp"
                   alt="Anuragg Sharma casting close-up"
-                  loading="lazy"
-                  decoding="async"
+                  width={685}
+                  height={790}
+                  quality={100}
+                  sizes="(max-width: 700px) 78vw, 40vw"
                 />
                 <figcaption>
                   <span>Current look</span>
@@ -700,11 +708,13 @@ export default function PortfolioExperience() {
                 </figcaption>
               </figure>
               <figure className="casting-image casting-image-character">
-                <img
+                <Image
                   src="/casting/anuragg-character-portrait.webp"
                   alt="Anuragg Sharma character portrait"
-                  loading="lazy"
-                  decoding="async"
+                  width={377}
+                  height={607}
+                  quality={100}
+                  sizes="(max-width: 700px) 46vw, 24vw"
                 />
                 <figcaption>
                   <span>Character range</span>
@@ -798,11 +808,12 @@ export default function PortfolioExperience() {
                 </div>
                 <div className="project-art">
                   {project.image ? (
-                    <img
+                    <Image
                       src={project.image}
                       alt={`${project.title} poster`}
-                      loading="lazy"
-                      decoding="async"
+                      fill
+                      quality={100}
+                      sizes="(max-width: 700px) 100vw, 60vw"
                     />
                   ) : (
                     <div className="project-lettering" aria-hidden="true">
@@ -881,12 +892,13 @@ export default function PortfolioExperience() {
                 }}
                 aria-label={`Open ${image.title} image`}
               >
-                <img
+                <Image
                   src={image.src}
                   alt={`Anuragg Sharma — ${image.title}`}
+                  fill
+                  quality={100}
+                  sizes="(max-width: 700px) 50vw, 25vw"
                   style={{ objectPosition: image.position }}
-                  loading="lazy"
-                  decoding="async"
                 />
                 <span className="gallery-number">
                   {String(index + 1).padStart(2, "0")}
@@ -940,11 +952,13 @@ export default function PortfolioExperience() {
 
         <section className="professional" id="credentials">
           <div className="professional-image" data-reveal>
-            <img
+            <Image
               src="/anurag-sharma.jpg"
               alt="Portrait of Anuragg Sharma"
-              loading="lazy"
-              decoding="async"
+              width={780}
+              height={470}
+              quality={100}
+              sizes="(max-width: 700px) 100vw, 45vw"
             />
             <div>
               <span>Cinematic presence</span>
