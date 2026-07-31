@@ -397,7 +397,7 @@ export default function PortfolioExperience() {
         (activeImage + 1) % visibleGallery.length,
       ];
       adjacentImages.forEach((index) => {
-        const image = new Image();
+        const image = new window.Image();
         image.src = visibleGallery[index].fullSrc;
       });
     }
