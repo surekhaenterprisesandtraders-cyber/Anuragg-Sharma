@@ -6,7 +6,7 @@ export const siteConfig = {
   description:
     "Official portfolio of Indian actor Anuragg Sharma, featuring selected work across feature films, OTT, web series, television, music videos, and commercials.",
   url: (configuredUrl || "https://anuragg-sharma.vercel.app").replace(/\/$/, ""),
-  email: "anushvats@gmail.com",
+  email: "info@anuraggsharma.com",
   phone: "+919878984849",
   youtube: "https://www.youtube.com/@AnuraggSharmajuni/featured",
 } as const;

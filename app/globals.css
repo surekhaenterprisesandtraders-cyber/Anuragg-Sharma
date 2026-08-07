@@ -49,6 +49,7 @@ img {
 }
 
 #showreel,
+#why-anuragg,
 #profile,
 #casting,
 #work,
@@ -490,6 +491,121 @@ img {
 
 .showreel-intro a:hover span {
   transform: translate(3px, -3px);
+}
+
+.why-anuragg {
+  background:
+    radial-gradient(circle at 92% 8%, rgba(194, 154, 46, 0.2), transparent 27%),
+    var(--ivory);
+  color: var(--ink);
+  padding: clamp(100px, 11vw, 165px) 5vw clamp(110px, 12vw, 180px);
+  position: relative;
+}
+
+.why-anuragg::before {
+  background: rgba(5, 5, 5, 0.22);
+  content: "";
+  height: 1px;
+  left: 5vw;
+  position: absolute;
+  right: 5vw;
+  top: 0;
+}
+
+.why-anuragg-heading {
+  align-items: end;
+  display: grid;
+  gap: 8vw;
+  grid-template-columns: 1fr 30%;
+  margin: 0 4vw clamp(70px, 8vw, 110px) 9vw;
+}
+
+.why-anuragg-heading .eyebrow {
+  color: #85673c;
+}
+
+.why-anuragg-heading h2 {
+  font-family: var(--serif);
+  font-size: clamp(64px, 8.2vw, 132px);
+  font-weight: 400;
+  letter-spacing: -0.075em;
+  line-height: 0.82;
+  margin: 0;
+}
+
+.why-anuragg-heading h2 em {
+  color: var(--bronze);
+  font-weight: 400;
+}
+
+.why-anuragg-heading > p {
+  border-top: 1px solid var(--line-dark);
+  font-family: var(--serif);
+  font-size: clamp(19px, 1.75vw, 27px);
+  letter-spacing: -0.025em;
+  line-height: 1.22;
+  margin: 0;
+  padding-top: 22px;
+}
+
+.why-anuragg-grid {
+  border-top: 1px solid var(--line-dark);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.why-anuragg-grid article {
+  border-bottom: 1px solid var(--line-dark);
+  min-height: 330px;
+  padding: 30px clamp(22px, 2.5vw, 42px) 42px;
+  position: relative;
+}
+
+.why-anuragg-grid article:not(:nth-child(3)) {
+  border-right: 1px solid var(--line-dark);
+}
+
+.why-anuragg-grid article:nth-child(1),
+.why-anuragg-grid article:nth-child(2),
+.why-anuragg-grid article:nth-child(3) {
+  grid-column: span 4;
+}
+
+.why-anuragg-grid article:nth-child(4),
+.why-anuragg-grid article:nth-child(5) {
+  grid-column: span 6;
+}
+
+.why-anuragg-grid article:nth-child(3),
+.why-anuragg-grid article:nth-child(5) {
+  border-right: 0;
+}
+
+.why-anuragg-grid article > span {
+  color: #85673c;
+  display: block;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.18em;
+  margin-bottom: clamp(70px, 8vw, 118px);
+}
+
+.why-anuragg-grid h3 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 2.6vw, 42px);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  margin: 0 0 24px;
+  max-width: 440px;
+}
+
+.why-anuragg-grid p {
+  color: rgba(5, 5, 5, 0.66);
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 500px;
 }
 
 .reel-grid {
@@ -2378,6 +2494,35 @@ html[data-js="true"] [data-reveal].is-visible {
     display: none;
   }
 
+  .why-anuragg-heading {
+    align-items: start;
+    gap: 48px;
+    grid-template-columns: 1fr;
+    margin-left: 6vw;
+  }
+
+  .why-anuragg-heading > p {
+    max-width: 620px;
+  }
+
+  .why-anuragg-grid article,
+  .why-anuragg-grid article:nth-child(1),
+  .why-anuragg-grid article:nth-child(2),
+  .why-anuragg-grid article:nth-child(3),
+  .why-anuragg-grid article:nth-child(4) {
+    border-right: 1px solid var(--line-dark);
+    grid-column: span 6;
+  }
+
+  .why-anuragg-grid article:nth-child(even) {
+    border-right: 0;
+  }
+
+  .why-anuragg-grid article:nth-child(5) {
+    border-right: 0;
+    grid-column: span 12;
+  }
+
   .statement-inner {
     grid-template-columns: 1fr 4fr;
   }
@@ -2681,6 +2826,52 @@ html[data-js="true"] [data-reveal].is-visible {
   .reel-card-copy b,
   .reel-card:not(.reel-featured) .reel-card-copy b {
     font-size: 29px;
+  }
+
+  .why-anuragg {
+    padding: 88px 14px 105px;
+  }
+
+  .why-anuragg::before {
+    left: 14px;
+    right: 14px;
+  }
+
+  .why-anuragg-heading {
+    gap: 42px;
+    margin: 0 8px 62px;
+  }
+
+  .why-anuragg-heading h2 {
+    font-size: 17vw;
+  }
+
+  .why-anuragg-heading > p {
+    font-size: 23px;
+  }
+
+  .why-anuragg-grid {
+    display: block;
+  }
+
+  .why-anuragg-grid article,
+  .why-anuragg-grid article:nth-child(1),
+  .why-anuragg-grid article:nth-child(2),
+  .why-anuragg-grid article:nth-child(3),
+  .why-anuragg-grid article:nth-child(4),
+  .why-anuragg-grid article:nth-child(5) {
+    border-right: 0;
+    min-height: 0;
+    padding: 25px 8px 38px;
+  }
+
+  .why-anuragg-grid article > span {
+    margin-bottom: 54px;
+  }
+
+  .why-anuragg-grid h3 {
+    font-size: 34px;
+    margin-bottom: 19px;
   }
 
   .video-modal {

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   useEffect,
   useCallback,
@@ -86,8 +85,36 @@ const reelVideos = [
   },
 ];
 
+const whyAnuragg = [
+  {
+    title: "Versatility, Built for the Brief",
+    description:
+      "From restrained realism and emotional drama to intense, authoritative, or warmly relatable characters, Anuragg adapts his performance to the director’s vision, the tone of the script, and the needs of the frame.",
+  },
+  {
+    title: "A Collaborative Professional",
+    description:
+      "Prepared, approachable, and comfortable within a working crew, he respects the time and process of producers, directors, and casting teams—bringing a smooth, dependable, and low-maintenance presence to set.",
+  },
+  {
+    title: "Production-Ready, Pan-India",
+    description:
+      "Based in Mumbai and flexible for travel or extended stays across Punjab, Delhi, Gujarat, Haryana, and anywhere in India, he can align comfortably with demanding production schedules and locations.",
+  },
+  {
+    title: "Beyond the Performance",
+    description:
+      "When a project needs it, he is willing to contribute beyond acting—supporting the production team with practical on-ground coordination, creative problem-solving, and a hands-on, team-first attitude.",
+  },
+  {
+    title: "A Strong Industry Network",
+    description:
+      "His established relationships across Bollywood bring valuable familiarity with the industry and make professional communication, coordination, and collaboration more natural from the first conversation.",
+  },
+];
+
 const castingFacts = [
-  { label: "Playing age", value: "32–33 years" },
+  { label: "Playing age", value: "25–40 years" },
   { label: "Height", value: "5′8″ / 173 cm" },
   { label: "Weight", value: "79 kg" },
   { label: "Body type", value: "Average fit" },
@@ -214,8 +241,8 @@ const gallery = [
     position: "center 58%",
   },
   {
-    src: "/gallery/studio-smile.webp",
-    fullSrc: "/gallery/studio-smile.jpg",
+    src: "/anurag-sharma.jpg",
+    fullSrc: "/anurag-sharma.jpg",
     title: "Warmth",
     note: "Studio portrait",
     category: "headshots",
@@ -420,7 +447,7 @@ export default function PortfolioExperience() {
         (activeImage + 1) % visibleGallery.length,
       ];
       adjacentImages.forEach((index) => {
-        const image = new window.Image();
+        const image = new Image();
         image.src = visibleGallery[index].fullSrc;
       });
     }
@@ -480,14 +507,12 @@ export default function PortfolioExperience() {
       <main>
         <section className="cinematic-hero" id="top">
           <div className="hero-image" aria-hidden="true">
-            <Image
+            <img
               src="/hero-cinematic.webp"
               alt=""
-              fill
-              quality={100}
-              sizes="100vw"
-              priority
+              loading="eager"
               fetchPriority="high"
+              decoding="async"
             />
           </div>
           <div className="hero-shade" aria-hidden="true" />
@@ -569,12 +594,11 @@ export default function PortfolioExperience() {
                 onClick={() => setActiveVideo(video)}
                 aria-label={`Play ${video.title}`}
               >
-                <Image
+                <img
                   src={`https://i.ytimg.com/vi/${video.id}/${video.thumbnail}`}
                   alt=""
-                  fill
-                  quality={100}
-                  sizes="(max-width: 700px) 100vw, 33vw"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <span className="reel-card-shade" aria-hidden="true" />
                 <span className="reel-card-number">
@@ -589,6 +613,38 @@ export default function PortfolioExperience() {
                   <i>{video.note}</i>
                 </span>
               </button>
+            ))}
+          </div>
+        </section>
+
+        <section className="why-anuragg" id="why-anuragg">
+          <div className="why-anuragg-heading" data-reveal>
+            <div>
+              <span className="eyebrow">The professional advantage / On and off screen</span>
+              <h2>
+                Why Anuragg
+                <br />
+                <em>Sharma?</em>
+              </h2>
+            </div>
+            <p>
+              A versatile performer and a dependable production collaborator—
+              ready to serve the story, respect the process, and make every
+              working day smoother.
+            </p>
+          </div>
+
+          <div className="why-anuragg-grid">
+            {whyAnuragg.map((reason, index) => (
+              <article
+                key={reason.title}
+                data-reveal
+                style={{ transitionDelay: `${index * 65}ms` }}
+              >
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{reason.title}</h3>
+                <p>{reason.description}</p>
+              </article>
             ))}
           </div>
         </section>
@@ -640,13 +696,11 @@ export default function PortfolioExperience() {
           <div className="dossier-grid">
             <div className="dossier-portrait" data-reveal>
               <div className="portrait-frame">
-                <Image
+                <img
                   src="/anurag-representation.webp"
                   alt="Anuragg Sharma in a cinematic portrait"
-                  width={914}
-                  height={1280}
-                  quality={100}
-                  sizes="(max-width: 700px) 100vw, 40vw"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <span>Portrait / AS–02</span>
               </div>
@@ -717,13 +771,11 @@ export default function PortfolioExperience() {
           <div className="casting-layout">
             <div className="casting-visuals" data-reveal>
               <figure className="casting-image casting-image-main">
-                <Image
+                <img
                   src="/casting/anuragg-casting-closeup.webp"
                   alt="Anuragg Sharma casting close-up"
-                  width={685}
-                  height={790}
-                  quality={100}
-                  sizes="(max-width: 700px) 78vw, 40vw"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <figcaption>
                   <span>Current look</span>
@@ -731,13 +783,11 @@ export default function PortfolioExperience() {
                 </figcaption>
               </figure>
               <figure className="casting-image casting-image-character">
-                <Image
+                <img
                   src="/casting/anuragg-character-portrait.webp"
                   alt="Anuragg Sharma character portrait"
-                  width={377}
-                  height={607}
-                  quality={100}
-                  sizes="(max-width: 700px) 46vw, 24vw"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <figcaption>
                   <span>Character range</span>
@@ -831,12 +881,11 @@ export default function PortfolioExperience() {
                 </div>
                 <div className="project-art">
                   {project.image ? (
-                    <Image
+                    <img
                       src={project.image}
                       alt={`${project.title} poster`}
-                      fill
-                      quality={100}
-                      sizes="(max-width: 700px) 100vw, 60vw"
+                      loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <div className="project-lettering" aria-hidden="true">
@@ -915,13 +964,12 @@ export default function PortfolioExperience() {
                 }}
                 aria-label={`Open ${image.title} image`}
               >
-                <Image
+                <img
                   src={image.src}
                   alt={`Anuragg Sharma — ${image.title}`}
-                  fill
-                  quality={100}
-                  sizes="(max-width: 700px) 50vw, 25vw"
                   style={{ objectPosition: image.position }}
+                  loading="lazy"
+                  decoding="async"
                 />
                 <span className="gallery-number">
                   {String(index + 1).padStart(2, "0")}
@@ -975,13 +1023,11 @@ export default function PortfolioExperience() {
 
         <section className="professional" id="credentials">
           <div className="professional-image" data-reveal>
-            <Image
-              src="/anurag-sharma.jpg"
+            <img
+              src="/gallery/studio-smile.jpg"
               alt="Portrait of Anuragg Sharma"
-              width={780}
-              height={470}
-              quality={100}
-              sizes="(max-width: 700px) 100vw, 45vw"
+              loading="lazy"
+              decoding="async"
             />
             <div>
               <span>Cinematic presence</span>
@@ -1067,7 +1113,9 @@ export default function PortfolioExperience() {
           <div className="contact-details">
             <div>
               <span>Email</span>
-              <a href="mailto:anushvats@gmail.com">anushvats@gmail.com</a>
+              <a href="mailto:info@anuraggsharma.com">
+                info@anuraggsharma.com
+              </a>
             </div>
             <div>
               <span>Mobile</span>
